@@ -2961,7 +2961,7 @@ struct MazeDuoView: View {
                     ctx.fill(Path(ellipseIn: goalRect), with: .color(DuoTheme.lime.opacity(0.85)))
 
                     let bx = duoLocalX(world.ballX, link.role ?? .left)
-                    let ballRect = CGRect(x: CGFloat(bx) * scaleX - 7, y: world.ballY * scaleY - 7,
+                    let ballRect = CGRect(x: CGFloat(bx) * scaleX - 7, y: CGFloat(world.ballY) * scaleY - 7,
                                           width: 14, height: 14)
                     ctx.fill(Path(ellipseIn: ballRect), with: .color(.white))
                     ctx.stroke(Path(ellipseIn: ballRect.insetBy(dx: -2, dy: -2)),
