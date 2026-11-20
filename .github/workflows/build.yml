@@ -1,4 +1,4 @@
-name: Build IPA
+﻿name: Build IPA
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: macos-15
     timeout-minutes: 40
 
     steps:
@@ -25,7 +25,6 @@ jobs:
 
       - name: Install XcodeGen
         run: |
-          brew update || true
           brew install xcodegen
 
       - name: Generate Xcode project
