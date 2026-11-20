@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>ru</string>
+	<key>CFBundleDisplayName</key>
+	<string>iPhone Duo</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MinimumOSVersion</key>
+	<string>15.0</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+		<string>wifi</string>
+		<string>bluetooth-le</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string></string>
+	</dict>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>iPhone Duo соединяет два iPhone по Wi-Fi Direct и Bluetooth, чтобы получился один двойной экран.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Bluetooth нужен для поиска второго iPhone и синхронизации двух экранов.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Bluetooth нужен для поиска второго iPhone и синхронизации двух экранов.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_iphoneduo._tcp</string>
+		<string>_iphoneduo._udp</string>
+		<string>_iphonedouo._tcp</string>
+		<string>_iphonedouo._udp</string>
+	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Доступ к галерее нужен для отправки фото на второй экран и выбора видео для кинотеатра.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Сохранение снимков, сделанных удалённой камерой iPhone Duo.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Камера нужна для режима удалённого видоискателя на два экрана.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Микрофон нужен для синхронного света и записи звука в видео.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+	</dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+</dict>
+</plist>
