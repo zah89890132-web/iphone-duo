@@ -1167,6 +1167,8 @@ struct DuoWebView: UIViewRepresentable {
             } else if let url = url {
                 web.load(URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30))
             }
+        } else if span {
+            context.coordinator.applySpanIfNeeded(web)
         }
     }
 
@@ -1178,7 +1180,7 @@ struct DuoWebView: UIViewRepresentable {
         var offset: Double
         var span: Bool
         var loadedID = -1
-        private var applied = false
+        private var appliedWidth: CGFloat = 0
 
         init(offset: Double, span: Bool) {
             self.offset = offset
@@ -1186,27 +1188,44 @@ struct DuoWebView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-            applied = false
+            appliedWidth = 0
         }
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             if span { applySpan(webView) }
         }
 
+        func applySpanIfNeeded(_ webView: WKWebView) {
+            guard abs(webView.bounds.width - appliedWidth) > 2 else { return }
+            applySpan(webView)
+        }
+
+        /// Два iPhone = один общий canvas: ширина страницы ровно 2 × ширины экрана,
+        /// поэтому каждая половина ложится на свой телефон в масштабе 1:1 без обрезки.
         func applySpan(_ webView: WKWebView) {
-            guard !applied else { return }
-            applied = true
-            let width = 1600
-            let x = Int(Double(width) * min(max(offset, 0), 0.95))
+            let half = webView.bounds.width
+            guard half > 1 else { return }
+            appliedWidth = half
+            let width = Int((half * 2).rounded())
+            let shift = Int((half * min(max(offset, 0), 1)).rounded())
             let js = """
             (function(){
+              var w = \(width), x = \(shift);
               var m = document.querySelector('meta[name=viewport]');
-              if (!m) { m = document.createElement('meta'); m.name='viewport'; document.head.appendChild(m); }
-              m.setAttribute('content','width=\(width), initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-              document.documentElement.style.width='\(width)px';
-              if (document.body) { document.body.style.width='\(width)px'; }
-              document.documentElement.style.overflowX='auto';
-              setTimeout(function(){ window.scrollTo(\(x), 0); }, 350);
+              if (!m) { m = document.createElement('meta'); m.name = 'viewport'; document.head.appendChild(m); }
+              m.setAttribute('content', 'width=' + w + ', initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no');
+              var st = document.getElementById('duo-span-style');
+              if (!st) { st = document.createElement('style'); st.id = 'duo-span-style'; document.documentElement.appendChild(st); }
+              st.textContent = 'html,body{width:' + w + 'px !important;min-width:' + w + 'px !important;max-width:none !important;overflow-x:auto !important;}';
+              function go(){
+                var se = document.scrollingElement || document.documentElement;
+                se.scrollLeft = x;
+                window.scrollTo(x, 0);
+              }
+              go();
+              setTimeout(go, 250);
+              setTimeout(go, 900);
+              setTimeout(go, 2000);
             })();
             """
             webView.evaluateJavaScript(js, completionHandler: nil)
