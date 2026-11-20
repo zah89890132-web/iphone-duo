@@ -1,4 +1,4 @@
-name: iPhoneDuoDemo
+﻿name: iPhoneDuoDemo
 options:
   bundleIdPrefix: com.custom
   deploymentTarget:
@@ -11,7 +11,7 @@ settings:
     SWIFT_VERSION: "5.0"
     IPHONEOS_DEPLOYMENT_TARGET: "15.0"
     CODE_SIGN_STYLE: Manual
-    ENABLE_BITCODE: "NO"
+    ENABLE_DEBUG_DYLIB: "NO"
 
 targets:
   iPhoneDuoDemo:
@@ -34,5 +34,5 @@ targets:
         CODE_SIGN_IDENTITY: ""
         CODE_SIGNING_REQUIRED: "NO"
         CODE_SIGNING_ALLOWED: "NO"
-        SWIFT_OPTIMIZATION_LEVEL: "-Onone"
+        SWIFT_OPTIMIZATION_LEVEL: "-O"
         ALWAYS_SEARCH_USER_PATHS: "NO"
